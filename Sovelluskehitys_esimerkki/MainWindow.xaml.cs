@@ -249,7 +249,27 @@ namespace Sovelluskehitys_esimerkki
             komento.ExecuteNonQuery();
             kanta.Close();
 
-            paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id", "tilaukset", tilaukset_lista);
+            paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu = '0'", "tilaukset", tilaukset_lista);
+
+        }
+
+        private void painike_toiminta_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView rivinakyma = (DataRowView)((Button)e.Source).DataContext;               // yhdistetään e ja Source (lähdetiedot)
+            String tilaus_id = rivinakyma[0].ToString();                                        // muutetaan tieto stringiksi
+
+            SqlConnection kanta = new SqlConnection(polku);
+            kanta.Open();
+
+            string sql = "UPDATE tilaukset SET toimitettu = 1 WHERE id='" + tilaus_id + "';";
+
+            SqlCommand komento = new SqlCommand(sql, kanta);
+            komento.ExecuteNonQuery();
+            kanta.Close();
+
+            paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu = '0'", "tilaukset", tilaukset_lista);
+            paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu = '1'", "toimitetut", toimitetut_lista);
+
 
         }
     }
