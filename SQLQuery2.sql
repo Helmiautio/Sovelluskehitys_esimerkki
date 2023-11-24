@@ -6,10 +6,12 @@ CREATE TABLE tilaukset (id INTEGER IDENTITY (1,1) PRIMARY KEY, asiakas_id INTEGE
 
 INSERT INTO tuotteet (nimi, hinta) VALUES ('maito', 2);
 
-INSERT INTO tilaukset (asiakas_id, tuote_id) VALUES (1, 1);
+INSERT INTO tilaukset (asiakas_id, tuote_id) VALUES (1, 2);
 
 SELECT * FROM tuotteet;
 
 SELECT * FROM asiakkaat;
+
+SELECT * FROM tilaukset;
 
 SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id
