@@ -96,6 +96,53 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
+            <TabItem Header="Tilausvahvistus" Margin="-2,-2,-2,0">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="267*"/>
+                        <ColumnDefinition Width="131*"/>
+                        <ColumnDefinition Width="396*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="toimitetut_lista1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="32,21,375,173" AutoGenerateColumns="False" Grid.ColumnSpan="3">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="id" Binding="{Binding id}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="asiakas" Binding="{Binding asiakas}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="tuote" Binding="{Binding tuote}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="toimitettu" Binding="{Binding toimitettu}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Lähetys vastaanotettu" Binding="{Binding vastaanotettu}" IsReadOnly="True"/>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Tilaushistoria" Margin="-2,-2,-2,0">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="173*"/>
+                        <ColumnDefinition Width="224*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="tilaukset_lista1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="32,21,375,173" AutoGenerateColumns="False" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="id" Binding="{Binding id}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="asiakas" Binding="{Binding asiakas}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="tuote" Binding="{Binding tuote}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="toimitettu" Binding="{Binding toimitettu}" IsReadOnly="True"/>
+                            <DataGridTemplateColumn Header="toimita">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="painike_toimita_tilaus" Content="Toimita" Click="painike_toiminta_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Label Content="Asiakas" HorizontalAlignment="Left" Margin="32,255,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Tuote" HorizontalAlignment="Left" Margin="243,255,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="combo_asiakkaat1" HorizontalAlignment="Left" Margin="106,257,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="combo_tuotteet_1" HorizontalAlignment="Left" Margin="299,257,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.508,-0.345" Grid.ColumnSpan="2"/>
+                    <Button Content="Lisää tilaus" HorizontalAlignment="Left" Margin="99,303,0,0" VerticalAlignment="Top" Height="29" Width="253" Click="Button_Click" Grid.ColumnSpan="2"/>
+                </Grid>
+            </TabItem>
         </TabControl>
         <StatusBar VerticalAlignment="Bottom">
             <TextBlock x:Name="tilaviesti" Text="Valmis"/>
